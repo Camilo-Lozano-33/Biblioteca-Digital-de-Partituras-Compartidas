@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Partituras</title>
+</head>
+<body>
+<h2>Listado de Partituras</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Título</th>
+        <th>Compositor</th>
+        <th>Instrumento</th>
+        <th>Género</th>
+        <th>Dificultad</th>
+        <th>PDF</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="partitura : ${pagina.content}">
+        <td th:text="${partitura.titulo}"></td>
+        <td th:text="${partitura.compositor}"></td>
+        <td th:text="${partitura.instrumento}"></td>
+        <td th:text="${partitura.genero}"></td>
+        <td th:text="${partitura.dificultad}"></td>
+        <td><a th:href="@{'/uploads/partituras/' + ${partitura.archivoPdf}}" target="_blank">Ver PDF</a></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <span th:text="'Página ' + ${pagina.number + 1} + ' de ' + ${pagina.totalPages}"></span>
+    <div>
+        <a th:if="${pagina.hasPrevious()}" th:href="@{/partituras(page=${pagina.number - 1})}">Anterior</a>
+        <a th:if="${pagina.hasNext()}" th:href="@{/partituras(page=${pagina.number + 1})}">Siguiente</a>
+    </div>
+</div>
+<a th:href="@{/partituras/subir}">Subir nueva partitura</a>
+</body>
+</html>

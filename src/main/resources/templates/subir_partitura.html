@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir Partitura</title>
+</head>
+<body>
+<h2>Subir Partitura</h2>
+<form th:action="@{/partituras/subir}" method="post" enctype="multipart/form-data" th:object="${partituraForm}">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" th:field="*{titulo}" required/><br/>
+    <label for="compositor">Compositor:</label>
+    <input type="text" id="compositor" th:field="*{compositor}" required/><br/>
+    <label for="instrumento">Instrumento:</label>
+    <input type="text" id="instrumento" th:field="*{instrumento}" required/><br/>
+    <label for="genero">Género:</label>
+    <input type="text" id="genero" th:field="*{genero}" required/><br/>
+    <label for="dificultad">Dificultad:</label>
+    <input type="text" id="dificultad" th:field="*{dificultad}" required/><br/>
+    <label for="archivoPdf">Archivo PDF:</label>
+    <input type="file" id="archivoPdf" name="archivoPdf" accept="application/pdf" required/><br/>
+    <button type="submit">Subir Partitura</button>
+</form>
+<div th:if="${error}" style="color:red;">[[${error}]]</div>
+<div th:if="${exito}" style="color:green;">[[${exito}]]</div>
+<a th:href="@{/}">Volver al inicio</a>
+</body>
+</html>
